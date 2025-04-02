@@ -9,7 +9,7 @@ DashboardPage.getInitialProps = async ({ query }) => {
 
 export default function DashboardPage({ taskData }) {
   const tasks = JSON.parse(taskData);
-  console.log(tasks);
+  // console.log(tasks);
 
   
   return (

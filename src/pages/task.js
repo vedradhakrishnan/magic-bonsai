@@ -50,7 +50,7 @@ function convertToEditable(taskTree) {
       grandchild.nodeId = (count++);
     });
   });
-  console.log(editableTaskTree);
+  // console.log(editableTaskTree);
   return editableTaskTree;
 }
 
