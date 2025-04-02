@@ -1,9 +1,23 @@
 {
-    "updateContentCommand": "npm install",
+    "name": "My App",
+    "build": {
+      "dockerfile": "Dockerfile",
+      "context": ".."
+    },
+    "runArgs": ["--init"],
+    "postCreateCommand": "npm install",
     "remoteEnv": {
-        "PORT": "${PORT}",
-        "MONGO_URI": "${MONGO_URI}",
-        "NEXT_PUBLIC_ONCHAINKIT_API_KEY": "${NEXT_PUBLIC_ONCHAINKIT_API_KEY}",
-        "OPENAI_API_KEY": "${OPENAI_API_KEY}"
+      "PORT": "3000",
+      "MONGO_URI": "${MONGO_URI}",
+      "NEXT_PUBLIC_ONCHAINKIT_API_KEY": "${NEXT_PUBLIC_ONCHAINKIT_API_KEY}",
+      "OPENAI_API_KEY": "${OPENAI_API_KEY}"
+    },
+    "forwardPorts": [3000],
+    "portsAttributes": {
+      "3000": {
+        "label": "App Port",
+        "onAutoForward": "notify"
+      }
     }
-}
+  }
+  

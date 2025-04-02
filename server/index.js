@@ -26,7 +26,7 @@ const handle = nextApp.getRequestHandler();
 
 const PORT = process.env.PORT || 3000;
 
-mongoose.connect(process.env.MONGO_URI);
+await mongoose.connect(process.env.MONGO_URI);
 
 nextApp.prepare().then(() => {
   const app = express();
