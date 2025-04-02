@@ -1,5 +1,6 @@
 {
     "updateContentCommand": "npm install",
+    "postStartCommand": "npx --yes pm2 start server/index.js",
     "remoteEnv": {
         "PORT": "${PORT}",
         "MONGO_URI": "${MONGO_URI}",
