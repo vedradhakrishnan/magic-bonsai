@@ -1,3 +1,9 @@
 {
-    "updateContentCommand": "npm install"
+    "updateContentCommand": "npm install",
+    "remoteEnv": {
+        "PORT": "${PORT}",
+        "MONGO_URI": "${MONGO_URI}",
+        "NEXT_PUBLIC_ONCHAINKIT_API_KEY": "${NEXT_PUBLIC_ONCHAINKIT_API_KEY}",
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}"
+    }
 }
