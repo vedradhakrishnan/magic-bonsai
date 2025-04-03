@@ -1,4 +1,50 @@
-
+# **🌱 MagicBonsai**  
+ 
+ ## **Overview**  
+ MagicBonsai is a web application that helps users break down large projects into manageable subtasks using a visual bonsai tree. Each task represents a branch, and as users complete tasks, their tree grows dynamically. The application leverages **Express.js, MongoDB, and React (ShadCN UI)** to provide an engaging way to manage productivity.
+ 
+ ---
+ 
+ ## **Data Model**  
+ 
+ ### **Entities & Relationships**  
+ - **Users** own multiple **trees**.  
+ - **Each tree** has **tasks** assigned to it.  
+ 
+ ### **Sample Documents**  
+ ## **[Tree Schema](server/db.js)**  
+ 
+ ---
+ 
+ ## **Wireframes**  
+ Located in the **/documentation** folder.  
+ 
+ ### **Single Task Page**  
+ ![task page](documentation/task.jpg)
+ 
+ ### **Task Creation Form**  
+ ![task form](documentation/task-form.png)
+ 
+ ### **User Task Garden**  
+ ![garden](documentation/garden.jpg)
+ 
+ ---
+ 
+ ## **Site Map**  
+ ```
+ Dashboard → Task Page → Task Completion
+           → Task Creation → Garden
+ ```
+ 
+ ---
+ 
+ ## **User Stories**
+ As a frantic student, I can break down my final coding project into smaller tasks, so that I can manage my workload efficiently.
+ 
+ As a financial newb, I can create a step-by-step investment plan, so that I can good build financial habits.
+ 
+ As someone who wants run a marathon, I can break down my training plan into milestones, so that I can stay motivated.
+ 
  ---
  
  # Research Topics for MagicBonsai
@@ -55,5 +101,11 @@
  
  ---
  
- ## **[Link to Initial Main Project File](src/app.mjs)**  
+ ## **[Link to Initial Main Project File](server/index.js)**  
  
+ ---
+ 
+ ## **Annotations / References Used**  
+ 1. [Express.js Documentation](https://expressjs.com/)  
+ 2. [Mongoose Guide](https://mongoosejs.com/docs/)  
+ 3. [ShadCN Documentation](https://ui.shadcn.com/)  
