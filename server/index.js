@@ -25,6 +25,7 @@ const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
 
 const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || '0.0.0.0';
 
 await mongoose.connect(process.env.MONGO_URI);
 
@@ -118,7 +119,7 @@ nextApp.prepare().then(() => {
     return handle(req, res);
   });
 
-  app.listen(PORT, () => {
-    console.log(`🚀 Server running at http://localhost:${PORT}`);
-  });
+  app.listen(PORT, HOST, () => {
+    console.log(`Server running on http://${HOST}:${PORT}`);
+  });  
 });
