@@ -1,18 +1,18 @@
 # **🌱 MagicBonsai**  
  
  ## **Overview**  
- MagicBonsai is a web application that helps users break down large projects into manageable subtasks using a visual bonsai tree. Each task represents a branch, and as users complete tasks, their tree grows dynamically. The application leverages **Express.js, MongoDB, and React (ShadCN UI)** to provide an engaging way to manage productivity.
+ MagicBonsai is a web application that helps users break down large projects into manageable subtasks using a visual bonsai tree. Each task represents a branch, and as users complete tasks, their tree grows dynamically. The application leverages **Express.js, MongoDB, Next.js (ShadCN UI), and Three.js** to provide an engaging way to manage productivity.
  
  ---
  
  ## **Data Model**  
  
  ### **Entities & Relationships**  
- - **Users** own multiple **trees**.  
- - **Each tree** has **tasks** assigned to it.  
+ - A **Garden** has multiple **trees**.  
+ - **Each tree** has **one task** assigned to it.  
  
  ### **Sample Documents**  
- ## **[Tree Schema](server/db.js)**  
+ ## **[Tree and Garden Schemas](server/db.js)**  
  
  ---
  
@@ -76,16 +76,14 @@
  
  ---
  
- ## 3. User Authentication with JWT & bcrypt
+ ## 3. Web3 User Authentication with OnChainKit
  ### What is it?
- JSON Web Tokens (JWT) are a secure way to authenticate users, while **bcrypt** is used for securely hashing passwords before storing them in the database.
+**OnChainKit** is a toolkit that streamlines wallet-based authentication for Web3 applications. It leverages blockchain wallets (like **Coinbase Wallet**) to authenticate users. It comes with pre-built components for connecting wallets, displaying identity information (avatar, name, and address), and handling wallet sessions.
  
- ### Why use it?
- Authentication ensures that users can securely manage their info. JWT enables token-based authentication, which is scalable for web applications, and **bcrypt** enhances password security by hashing and salting credentials.
- 
- ### Possible Solutions:
- - **jsonwebtoken (JWT)** for secure session management
- - **bcrypt.js** for password hashing
+### Why use it?
+- **Seamless Web3 Integration:** Easily add wallet connectivity, and allow for future integration with onchain storage and ownership.
+- **Simplified Authentication Flow:** Once a user connects their wallet, the app automatically stores the address to the session via the `/connect` endpoint.
+
  
  ---
  
