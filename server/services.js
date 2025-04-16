@@ -1,5 +1,4 @@
 import OpenAI from "openai";
-import mongoose from 'mongoose';
 import { Tree, Garden } from './db.js';
 import { v4 as uuidv4 } from 'uuid'; 
 import 'dotenv/config';
@@ -45,8 +44,6 @@ export async function generateTaskTree(prompt) {
     }
 
     const tree = JSON.parse(output);  
-
-    // const tree = JSON.parse(response.choices[0].message.content);
     
     tree.completed = false;
     tree.subtasks.forEach(child => { 
@@ -57,6 +54,36 @@ export async function generateTaskTree(prompt) {
     });
 
     return tree;
+}
+
+
+function randomSpecimen() {
+  return "Willow";
+}
+
+async function randomCoords(owner) {
+  let garden = await Garden.findOne({ owner });
+  if (!garden) {
+    garden = await Garden.create({ owner });
+  }
+
+  const grid = garden.grid;
+
+  const empty = [];
+  for (let row = 0; row < grid.length; row++) {
+    for (let col = 0; col < grid[row].length; col++) {
+      if (grid[row][col] === null) {
+        empty.push({ row, col });
+      }
+    }
+  }
+
+  if (empty.length === 0) {
+    throw new Error("The garden is full!");
+  }
+
+  const ri = Math.floor(Math.random() * empty.length);
+  return empty[ri];
 }
 
 export async function saveNewTree(taskTree, owner) {
@@ -84,31 +111,3 @@ export async function saveNewTree(taskTree, owner) {
 
 }
 
-function randomSpecimen() {
-    return "Willow";
-}
-
-async function randomCoords(owner) {
-  let garden = await Garden.findOne({ owner });
-  if (!garden) {
-    garden = await Garden.create({ owner });
-  }
-  
-  const grid = garden.grid;
-
-  const empty = [];
-  for (let row = 0; row < grid.length; row++) {
-    for (let col = 0; col < grid[row].length; col++) {
-      if (grid[row][col] === null) {
-        empty.push({ row, col });
-      }
-    }
-  }
-
-  if (empty.length === 0) {
-    throw new Error("The garden is full!");
-  }
-
-  const ri = Math.floor(Math.random() * empty.length);
-  return empty[ri];
-}

@@ -1,22 +1,22 @@
-import { useState } from 'react'
-import Link from 'next/link'
+import { useState } from 'react';
+import Link from 'next/link';
 
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
 
-import { Home } from 'lucide-react'
+import { Home } from 'lucide-react';
 
   
 export default function NewTreePage() {
-    const [taskName, setTaskName] = useState('')
-    const [description, setDescription] = useState('')
-    const [treeStatus, setTreeStatus] = useState("READY")
+    const [taskName, setTaskName] = useState('');
+    const [description, setDescription] = useState('');
+    const [treeStatus, setTreeStatus] = useState("READY");
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setTreeStatus("GENERATING")
+    e.preventDefault();
+    setTreeStatus("GENERATING");
     const res = await fetch('/new-tree', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -25,8 +25,8 @@ export default function NewTreePage() {
         description,
         treeStatus: "GENERATING"
       }),
-    })
-    console.log('Generating tree...')
+    });
+    console.log('Generating tree...');
 
     if (res.ok) {
       const data = await res.json(); 
@@ -35,20 +35,20 @@ export default function NewTreePage() {
       console.error('Error planting bonsai');
     }
     
-  }
+  };
 
-  let buttonLabel = 'Plant Bonsai'
-  let buttonClasses = 'bg-green-600 hover:bg-green-700 text-white font-semibold'
-  let isDisabled = false
+  let buttonLabel = 'Plant Bonsai';
+  let buttonClasses = 'bg-green-600 hover:bg-green-700 text-white font-semibold';
+  let isDisabled = false;
 
   if (treeStatus === "GENERATING") {
-    buttonLabel = 'Generating Tree...'
-    buttonClasses = 'bg-green-300 text-white font-semibold cursor-not-allowed'
-    isDisabled = true
+    buttonLabel = 'Generating Tree...';
+    buttonClasses = 'bg-green-300 text-white font-semibold cursor-not-allowed';
+    isDisabled = true;
   } else if (treeStatus === "MINTING") {
-    buttonLabel = 'Minting Tree...'
-    buttonClasses = 'bg-green-300 text-white font-semibold cursor-not-allowed'
-    isDisabled = true
+    buttonLabel = 'Minting Tree...';
+    buttonClasses = 'bg-green-300 text-white font-semibold cursor-not-allowed';
+    isDisabled = true;
   }
 
   return (
@@ -98,6 +98,6 @@ export default function NewTreePage() {
         <span className="hidden md:inline">Go Home</span>
       </Link>
     </div>
-  )
+  );
 
 }

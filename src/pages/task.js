@@ -1,43 +1,17 @@
 import React from 'react';
-import { useState } from 'react'
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
-import { ScrollArea } from "@/components/ui/scroll-area"
+import { useState } from 'react';
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion"
-import { Canvas } from '@react-three/fiber'  
-
-
-
-export async function getServerSideProps(context) {
-  const { taskTree } = context.query;
-
-  let parsedTaskTree = null;
-  try {
-    parsedTaskTree = taskTree ? JSON.parse(taskTree) : null;
-  } catch (error) {
-    console.error('Error parsing taskTree:', error);
-  }
-
-  // console.log(JSON.parse(parsedTaskTree.assignedTask));
-  const editableRootNode = convertToEditable(JSON.parse(parsedTaskTree.assignedTask));
-
-  return {
-    props: {
-        taskTree: parsedTaskTree,
-        root: editableRootNode,
-    },
-  };
-}
-
-
+} from "@/components/ui/accordion";
+import { Canvas } from '@react-three/fiber';  
 
 function convertToEditable(taskTree) {
-  if (!taskTree) return null;
+  if (!taskTree) {return null;}
 
   const editableTaskTree = {...taskTree};
   let count = 0;
@@ -51,8 +25,28 @@ function convertToEditable(taskTree) {
       grandchild.nodeId = (count++);
     });
   });
-  // console.log(editableTaskTree);
+
   return editableTaskTree;
+}
+
+export async function getServerSideProps(context) {
+  const { taskTree } = context.query;
+
+  let parsedTaskTree = null;
+  try {
+    parsedTaskTree = taskTree ? JSON.parse(taskTree) : null;
+  } catch (error) {
+    console.error('Error parsing taskTree:', error);
+  }
+
+  const editableRootNode = convertToEditable(JSON.parse(parsedTaskTree.assignedTask));
+
+  return {
+    props: {
+        taskTree: parsedTaskTree,
+        root: editableRootNode,
+    },
+  };
 }
 
 function convertToSchema(taskTree) {
@@ -71,7 +65,7 @@ function convertToSchema(taskTree) {
           subtasks: []
         };
       }),
-    }
+    };
   });
 
   return schemaTaskTree;
@@ -80,15 +74,15 @@ function convertToSchema(taskTree) {
 export default function TaskPage({ taskTree, root }) {
   const [eRoot, setERoot] = useState(root);
   
-  if (!taskTree || !root) return <p>Loading...</p>;
+  if (!taskTree || !root) {return <p>Loading...</p>;}
   
     const handleToggle = (id) => {
 
       // console.log("toggle " + id );
       const newRoot = {...eRoot};
       
-      if (newRoot.nodeId == id) {
-        newRoot.completed = !newRoot.completed
+      if (newRoot.nodeId === id) {
+        newRoot.completed = !newRoot.completed;
         newRoot.subtasks.forEach((child) => {
           child.completed = newRoot.completed;
           child.subtasks.forEach((grandchild) => {
@@ -100,8 +94,8 @@ export default function TaskPage({ taskTree, root }) {
       } 
        
       newRoot.subtasks.forEach((child) => {
-        if (child.nodeId == id) {
-          child.completed = !child.completed
+        if (child.nodeId === id) {
+          child.completed = !child.completed;
           child.subtasks.forEach((grandchild) => {
             grandchild.completed = child.completed;
           });
@@ -112,8 +106,8 @@ export default function TaskPage({ taskTree, root }) {
 
       newRoot.subtasks.forEach((child) => {
         child.subtasks.forEach((grandchild) => {
-          if (grandchild.nodeId == id) {
-            grandchild.completed = !grandchild.completed
+          if (grandchild.nodeId === id) {
+            grandchild.completed = !grandchild.completed;
             setERoot(newRoot);
             return;
           }

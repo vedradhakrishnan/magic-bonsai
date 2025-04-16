@@ -3,10 +3,6 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 
-DashboardPage.getInitialProps = async ({ query }) => {
-  return { taskData: query.taskData || "[]" };
-};
-
 export default function DashboardPage({ taskData }) {
   const tasks = JSON.parse(taskData);
   // console.log(tasks);
@@ -54,3 +50,7 @@ export default function DashboardPage({ taskData }) {
     </div>
   );
 }
+
+DashboardPage.getInitialProps = async ({ query }) => {
+  return { taskData: query.taskData || "[]" };
+};

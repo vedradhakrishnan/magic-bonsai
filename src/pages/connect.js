@@ -7,7 +7,6 @@ import {
 } from '@coinbase/onchainkit/wallet';
 import { Avatar, Name, Address } from '@coinbase/onchainkit/identity';
 import { useAccount } from 'wagmi';
-import { CONFIG_FILES } from 'next/dist/shared/lib/constants';
 import { useEffect } from 'react';
 
 export default function ConnectPage() {
@@ -20,9 +19,7 @@ export default function ConnectPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ wallet: address }),
       })
-        .then((res) => {
-          window.location.reload();
-        })
+        .then(window.location.reload())
         .catch((err) => {
           console.error('Wallet POST failed:', err);
         });

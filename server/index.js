@@ -97,7 +97,7 @@ nextApp.prepare().then(() => {
       return {
         name,
         treeId: task.treeId
-      }
+      };
     });
 
     // console.log(taskData);
