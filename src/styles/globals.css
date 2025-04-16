@@ -209,3 +209,10 @@ ul > li:last-child {
   padding-left: 1em; 
   border-left: 2px solid transparent;
 }
+
+.exo-2-default {
+  font-family: "Exo 2", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}

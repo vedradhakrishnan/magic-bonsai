@@ -115,6 +115,24 @@ nextApp.prepare().then(() => {
     return nextApp.render(req, res, '/task', { taskTree: JSON.stringify(taskTree) });
   });
 
+  app.post('/task/:treeId', async (req, res) => {
+    const { treeId } = req.params;
+    const updatedTaskTree = req.body.newTree;
+
+    try {
+      const existingTree = await Tree.findOne({ treeId });
+      console.log(treeId);
+      existingTree.assignedTask = JSON.stringify(updatedTaskTree);
+      await existingTree.save();
+
+      res.redirect('/dashboard');
+    } catch (error) {
+      console.error('Error updating task tree:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+
+  });
+
   app.all('*', (req, res) => {
     return handle(req, res);
   });

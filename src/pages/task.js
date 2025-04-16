@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react'
+import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import {
@@ -8,7 +9,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { Canvas } from '@react-three/fiber'  // Import react-three-fiber's Canvas
+import { Canvas } from '@react-three/fiber'  
 
 
 
@@ -22,8 +23,8 @@ export async function getServerSideProps(context) {
     console.error('Error parsing taskTree:', error);
   }
 
+  // console.log(JSON.parse(parsedTaskTree.assignedTask));
   const editableRootNode = convertToEditable(JSON.parse(parsedTaskTree.assignedTask));
-//   console.log("Editable root node:", editableRootNode);
 
   return {
     props: {
@@ -54,7 +55,27 @@ function convertToEditable(taskTree) {
   return editableTaskTree;
 }
 
+function convertToSchema(taskTree) {
+  const schemaTaskTree = {};
+  schemaTaskTree.task = taskTree.task;
+  schemaTaskTree.completed = taskTree.completed;
 
+  schemaTaskTree.subtasks = taskTree.subtasks.map(child => {
+    return {
+      task: child.task,
+      completed: child.completed,
+      subtasks: child.subtasks.map(grandchild => {
+        return {
+          task: grandchild.task,
+          completed: grandchild.completed,
+          subtasks: []
+        };
+      }),
+    }
+  });
+
+  return schemaTaskTree;
+}
 
 export default function TaskPage({ taskTree, root }) {
   const [eRoot, setERoot] = useState(root);
@@ -113,6 +134,9 @@ export default function TaskPage({ taskTree, root }) {
         color: '#333'
       }}
     >
+      <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+      <link rel="preconnect" href="https://fonts.gstatic.com"></link>
+      <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital@0;1&display=swap" rel="stylesheet"></link>
       <div className="w-[50%] h-full">
         <Canvas>
           <ambientLight intensity={0.5} />
@@ -123,7 +147,7 @@ export default function TaskPage({ taskTree, root }) {
           </mesh>
         </Canvas>
       </div>
-        <div className="tree-root w-[50%] bg-[#FBE7B1] px-4">
+        <div className="tree-root w-[50%] bg-[#FBE7B1] px-4 py-4 exo-2-default">
           
           <h2>{eRoot.task}</h2>
           <Accordion type="single" collapsible className="">
@@ -173,6 +197,25 @@ export default function TaskPage({ taskTree, root }) {
                 </div>
               )}
           </Accordion>
+            
+          <Button
+            className={"mx-6 my-4"}
+            onClick={() => {
+              fetch(`/task/${taskTree.treeId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ newTree: convertToSchema(eRoot) }),
+              })
+              .then(
+                window.location.href = '/dashboard'
+              )
+              .catch((err) => {
+                console.error('Task POST failed:', err);
+              });
+
+              
+            }}
+          >Save Changes and Exit</Button>
         </div>
       </div>
     );
