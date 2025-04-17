@@ -17,6 +17,8 @@ After a task tree is generated, you will be redirected to that task's page (Also
 
 ## URL to github that shows line of code where research topic(s) are used / implemented
 [server/services.js at line 22 - Use of OpenAI API](https://github.com/nyu-csci-ua-0467-001-002-spring-2025/final-project-deployment-vedradhakrishnan/blob/master/server/services.js#L22)
-[src/pages/task.js at line 136 - Use of Three.js](https://github.com/nyu-csci-ua-0467-001-002-spring-2025/final-project-deployment-vedradhakrishnan/blob/master/src/pages/task.js#135)
-[src/pages/connect.js at line 34 - Use of Coinbase OnChainKit](https://github.com/nyu-csci-ua-0467-001-002-spring-2025/final-project-deployment-vedradhakrishnan/blob/master/src/pages/connect.js#34)
+
+[src/pages/task.js at line 136 - Use of Three.js](https://github.com/nyu-csci-ua-0467-001-002-spring-2025/final-project-deployment-vedradhakrishnan/blob/master/src/pages/task.js#L135)
+
+[src/pages/connect.js at line 34 - Use of Coinbase OnChainKit](https://github.com/nyu-csci-ua-0467-001-002-spring-2025/final-project-deployment-vedradhakrishnan/blob/master/src/pages/connect.js#L34)
 
