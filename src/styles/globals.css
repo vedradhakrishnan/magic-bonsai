@@ -151,7 +151,7 @@ ul {
 }
 li {
   list-style-type: none;
-  border-left: 2px solid #000;
+  border-left: 2px solid #A18C53;
   margin-left: 0.5em;
 }
 li div {
@@ -165,7 +165,7 @@ li div::before {
   left: -2px;
   bottom: 50%;
   width: 0.75em;
-  border: 2px solid #000;
+  border: 2px solid #A18C53;
   border-top: 0 none transparent;
   border-right: 0 none transparent;
 }
@@ -188,7 +188,7 @@ ul > li:last-child {
   position: relative;
   margin-left: 1em;
   padding-left: 1em; 
-  border-left: 2px solid #000;
+  border-left: 2px solid #A18C53;
 }
 
 .accordion-node::before {
@@ -198,8 +198,8 @@ ul > li:last-child {
   left: -2px;
   width: 0.75em;
   height: 1.75em;
-  border-left: 2px solid #000;
-  border-bottom: 2px solid #000;
+  border-left: 2px solid #A18C53;
+  border-bottom: 2px solid #A18C53;
 }
 
 

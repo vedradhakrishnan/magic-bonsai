@@ -3,7 +3,6 @@ import { Tree, Garden } from './db.js';
 import { v4 as uuidv4 } from 'uuid'; 
 import 'dotenv/config';
 
-
 export function requireWallet(req, res, next) {
     if (
         req.path === '/connect' ||
@@ -111,3 +110,19 @@ export async function saveNewTree(taskTree, owner) {
 
 }
 
+export async function deleteTree(treeId, owner) {
+    const tree = await Tree.findOne({ treeId });
+    const garden = await Garden.findOne({ owner });
+    if (!tree || !garden) {
+        throw new Error("Tree or garden not found");
+    }
+
+    const { row, col } = tree;
+    await Garden.findOneAndUpdate(
+      { owner },
+      { $set: { [`grid.${row}.${col}`]: null } } 
+    );
+
+    await Tree.deleteOne({ treeId });
+    return treeId;
+}

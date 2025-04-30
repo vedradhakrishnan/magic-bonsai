@@ -10,7 +10,8 @@ import mongoose from 'mongoose';
 import { 
   requireWallet, 
   generateTaskTree,
-  saveNewTree 
+  saveNewTree,
+  deleteTree, 
 } from './services.js';
 import { Tree } from './db.js';
 
@@ -132,6 +133,19 @@ nextApp.prepare().then(() => {
     }
 
   });
+
+  app.delete('/task/:treeId', async (req, res) => {
+    const { treeId } = req.params;
+    try {
+      await deleteTree(treeId, req.session.wallet);
+      return res.redirect('/dashboard');
+    } catch (error) {
+      console.error('Error deleting task tree:', error);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  // app.get('/garden', (req, res) => {
+  // });
 
   app.all('*', (req, res) => {
     return handle(req, res);
