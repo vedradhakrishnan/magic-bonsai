@@ -1,4 +1,4 @@
-# Milestone 02
+# Milestone 03
 
 ## Repository Link
 [final-project-deployment-vedradhakrishnan Repository](https://github.com/nyu-csci-ua-0467-001-002-spring-2025/final-project-deployment-vedradhakrishnan/tree/master)
